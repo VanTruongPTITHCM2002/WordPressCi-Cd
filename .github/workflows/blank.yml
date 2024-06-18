@@ -25,6 +25,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Run PHP-CGI
+        run: |
+            Start-Process -FilePath "php-cgi.exe" -ArgumentList "-b 127.0.0.1:9000" -NoNewWindow -PassThru
+
       # Runs a set of commands using the runners shell
       - name: Run nginx
         run: |
