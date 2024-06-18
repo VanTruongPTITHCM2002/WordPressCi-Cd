@@ -32,5 +32,5 @@ jobs:
             start nginx
       - name: Run nginx reverse proxy
         run: |
-            cd nginx-rerverseproxy\nginx-1.27.0
+            cd nginx-reverseproxy\nginx-1.27.0
             start nginx
