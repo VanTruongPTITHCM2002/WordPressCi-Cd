@@ -19,12 +19,41 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-
+    
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: 123456
+          MYSQL_DATABASE: wp_emc
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-      
+
+      - name: Wait for MySQL to be healthy
+        run: |
+              echo "Waiting for MySQL to start..."
+              for i in {1..30}; do
+                if mysqladmin ping -h 127.0.0.1 --silent; then
+                  echo "MySQL is up and running!"
+                  break
+                fi
+                echo "Waiting for MySQL..."
+                sleep 2
+              done
+
+      - name: Run MySQL commands
+        run: |
+          mysql -h 127.0.0.1 -u root -p123456 -e "SHOW DATABASES;"
+        shell: bash
 
       - name: Run PHP-CGI
         run: |
