@@ -26,12 +26,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Execute SQL file
-        uses: peter-evans/sql-action@v1
-        with:
-          driver: mysql
-          url: mysql://root@localhost:3306/wp_emc
-          script: backup.sql
+      
 
       - name: Run PHP-CGI
         run: |
