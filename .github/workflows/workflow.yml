@@ -68,7 +68,7 @@ jobs:
     - name: Deploy to FTP server
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-          server: ftp://files.000webhost.com
+          server: https://vantruong123123.000webhostapp.com/
           username: vantruong123123
           password: Anhkobietai123~
           port: 21
