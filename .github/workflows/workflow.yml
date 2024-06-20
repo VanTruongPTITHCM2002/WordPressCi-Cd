@@ -44,12 +44,18 @@ jobs:
       run: |
         cd nginx\nginx-1.27.0
         start nginx
-  
+    
     - name: start Nginx Reverse proxy
       run: |
         cd nginx-reverseproxy\nginx-1.27.0
         start nginx
-        
+    - name: Kiểm tra nội dung index.html
+      run: |
+        $indexContent = Get-Content -Path "./index.html"
+        if ($indexContent -match '<a.*href="http://localhosst".*>') {
+          Write-Output "index.html chứa thẻ a với href là http://localhosst"
+        } else {
+          Write-Error "index.html không chứa thẻ a với href là http://localhosst"
     - name: Run Tests
       run: |
         # Run additional tests to verify WordPress functionality
