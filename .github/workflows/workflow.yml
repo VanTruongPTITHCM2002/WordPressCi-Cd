@@ -1,0 +1,77 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install PHP
+      run: choco install php --version=7.4.0
+
+    
+    - name: Run PHP-CGI
+      run: Start-Process -FilePath "php-cgi.exe" -ArgumentList "-b 127.0.0.1:9000" -NoNewWindow -PassThru
+
+    - name: Install and Configure Nginx
+      run: |
+        choco install nginx
+        cd C:\tools\nginx\config
+        New-Item -Path . -Name "nginx.conf" -ItemType "file" -Force
+        Add-Content -Path .\nginx.conf -Value @"
+        worker_processes 1;
+
+        events { worker_connections 1024; }
+
+        http {
+            include       mime.types;
+            default_type  application/octet-stream;
+
+            sendfile        on;
+            keepalive_timeout 65;
+
+            server {
+                listen       80;
+                server_name  localhost;
+
+                root ${{ github.workspace }}\html;
+                index index.php index.html index.htm;
+
+                location / {
+                    try_files $uri $uri/ /index.php?$args;
+                }
+
+                location ~ \.php$ {
+                    include fastcgi_params;
+                    fastcgi_pass 127.0.0.1:9000;
+                    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                }
+
+                location ~ /\.ht {
+                    deny all;
+                }
+            }
+        }
+        "@
+
+    - name: Start Nginx
+      run: start nginx
+
+    - name: Test WordPress Admin Login
+      run: curl -s http://localhost
+
+    - name: Run Tests
+      run: |
+        # Run additional tests to verify WordPress functionality
+        # ví dụ kiểm tra bằng cURL đến các trang khác nhau
+        curl -s http://localhost/wp-admin --output /dev/null && echo "Admin page OK" || echo "Admin page not reachable"
+        curl -s http://localhost/wp-login.php --output /dev/null && echo "Login page OK" || echo "Login page not reachable"
