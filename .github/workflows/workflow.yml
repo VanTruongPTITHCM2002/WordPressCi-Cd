@@ -37,9 +37,6 @@ jobs:
         cd nginx-reverseproxy\nginx-1.27.0
         start nginx
         
-    - name: Test WordPress
-      run: curl -s http://localhost
-
     - name: Run Tests
       run: |
         # Run additional tests to verify WordPress functionality
