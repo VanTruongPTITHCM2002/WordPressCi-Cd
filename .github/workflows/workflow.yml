@@ -59,7 +59,7 @@ jobs:
           }
     - name: Kiểm tra tên database trong wp-config.php
       run: |
-        $wpConfig = Get-Content -Path ".nginx/nginx-1.27.0/html/wordpress/wp-config.php" -Raw
+        $wpConfig = Get-Content -Path "nginx/nginx-1.27.0/html/wordpress/wp-config.php" -Raw
         if ($wpConfig -match "'DB_NAME', '(wp_emc)'") {
           Write-Output "Tên database trong wp-config.php là wp_emc"
         } else {
