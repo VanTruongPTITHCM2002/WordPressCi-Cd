@@ -15,10 +15,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Install PHP
-      run: choco install php --version=7.4.0
-
-    
     - name: Run PHP-CGI
       run: Start-Process -FilePath "php-cgi.exe" -ArgumentList "-b 127.0.0.1:9000" -NoNewWindow -PassThru
 
