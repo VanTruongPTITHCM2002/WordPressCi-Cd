@@ -21,7 +21,7 @@ jobs:
     - name: Install and Configure Nginx
       run: |
         choco install nginx
-        cd nginx\nginx-1.27.0\config
+        cd nginx\nginx-1.27.0\conf
         New-Item -Path . -Name "nginx.conf" -ItemType "file" -Force
         Add-Content -Path .\nginx.conf -Value @"
         worker_processes 1;
