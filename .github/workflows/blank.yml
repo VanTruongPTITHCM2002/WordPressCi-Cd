@@ -26,23 +26,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Set up MySQL
-        run: choco install mysql --force
-        env:
-          MYSQL_SERVICE_NAME: "mysql"
-
-      - name: Start MySQL
-        run: |
-         powershell.exe -Command "Start-Service -Name mysql" || powershell.exe -Command "Restart-Service -Name mysql"
-
-      - name: Configure MySQL root password and create database
-        run: |
-          powershell.exe -Command "while (!(mysqladmin ping -u root -p123456 -h localhost -P 3306 -timeout 5s)); do { Start-Sleep -Seconds 1 }; done; mysql -u root -p123456 -h localhost -P 3306 -e 'CREATE DATABASE wp_emc;'"
-
-      - name: Import database
-        run: |
-         while (!(mysqladmin ping -u root -prootpassword -h localhost -P 3306 --silent)); do { Start-Sleep -Seconds 1 }; done; mysql -u root -p123456 -h localhost -P 3306 wordpress < ${{ github.workspace }}\backup.sql
-
+  
       - name: Run PHP-CGI
         run: |
             Start-Process -FilePath "php-cgi.exe" -ArgumentList "-b 127.0.0.1:9000" -NoNewWindow -PassThru
