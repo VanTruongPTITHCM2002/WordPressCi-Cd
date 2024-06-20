@@ -32,7 +32,11 @@ jobs:
         cd nginx\nginx-1.27.0
         start nginx
   
-
+    - name: start Nginx Reverse proxy
+      run: |
+        cd nginx-reverseproxy\nginx-1.27.0
+        start nginx
+        
     - name: Test WordPress
       run: curl -s http://localhost
 
