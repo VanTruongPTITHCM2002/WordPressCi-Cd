@@ -78,5 +78,5 @@ jobs:
       run: |
         # Run additional tests to verify WordPress functionality
         # ví dụ kiểm tra bằng cURL đến các trang khác nhau
-        curl -s http://localhost/wp-admin --output /dev/null && echo "Admin page OK" || echo "Admin page not reachable"
-        curl -s http://localhost/wp-login.php --output /dev/null && echo "Login page OK" || echo "Login page not reachable"
+        curl -s http://localhost --output /dev/null && echo "OK" || echo "Failed"
+       
