@@ -27,51 +27,13 @@ jobs:
     - name: Run PHP-CGI
       run: Start-Process -FilePath "php-cgi.exe" -ArgumentList "-b 127.0.0.1:9000" -NoNewWindow -PassThru
 
-    - name: Install and Configure Nginx
+    - name: start Nginx
       run: |
-        choco install nginx
-        cd nginx\nginx-1.27.0\conf
-        New-Item -Path . -Name "nginx.conf" -ItemType "file" -Force
-        Add-Content -Path .\nginx.conf -Value @"
-        worker_processes 1;
+        cd nginx\nginx-1.27.0
+        start nginx
+  
 
-        events { worker_connections 1024; }
-
-        http {
-            include       mime.types;
-            default_type  application/octet-stream;
-
-            sendfile        on;
-            keepalive_timeout 65;
-
-            server {
-                listen       80;
-                server_name  localhost;
-
-                root ${{ github.workspace }}\html;
-                index index.php index.html index.htm;
-
-                location / {
-                    try_files $uri $uri/ /index.php?$args;
-                }
-
-                location ~ \.php$ {
-                    include fastcgi_params;
-                    fastcgi_pass 127.0.0.1:9000;
-                    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-                }
-
-                location ~ /\.ht {
-                    deny all;
-                }
-            }
-        }
-        "@
-
-    - name: Start Nginx
-      run: start nginx
-
-    - name: Test WordPress Admin Login
+    - name: Test WordPress
       run: curl -s http://localhost
 
     - name: Run Tests
