@@ -56,6 +56,7 @@ jobs:
           Write-Output "index.html chứa thẻ a với href là http://localhosst"
         } else {
           Write-Error "index.html không chứa thẻ a với href là http://localhosst"
+          }
     - name: Run Tests
       run: |
         # Run additional tests to verify WordPress functionality
