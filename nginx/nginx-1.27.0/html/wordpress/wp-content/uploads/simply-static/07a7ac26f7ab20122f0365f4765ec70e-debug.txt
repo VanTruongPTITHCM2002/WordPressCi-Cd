@@ -1,0 +1,35 @@
+[2024-06-20 10:31:11] [class-ss-archive-creation-job.php:83] Starting a job; no job is presently running
+[2024-06-20 10:31:11] [class-ss-archive-creation-job.php:84] Here's our task list: setup, fetch_urls, generate_404, create_zip_archive, wrapup
+[2024-06-20 10:31:11] [class-ss-archive-creation-job.php:102] Pushing first task to queue: setup
+[2024-06-20 10:31:13] [class-ss-archive-creation-job.php:136] Current task: setup
+[2024-06-20 10:31:13] [class-ss-archive-creation-job.php:153] Performing task: setup
+[2024-06-20 10:31:13] [class-ss-task.php:44] Status message: [setup] Setting up
+[2024-06-20 10:31:13] [class-ss-setup-task.php:33] Creating archive directory: C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress/wp-content/uploads\simply-static\temp-files/simply-static-1-1718879471\
+[2024-06-20 10:31:13] [class-ss-setup-task.php:72] Adding origin URL to queue: http://localhost/
+[2024-06-20 10:31:13] [class-ss-setup-task.php:137] File C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-content\plugins\simply-static//src/integrations/simply-cdn/assets/ssh-form-webhook.js exists; adding to queue as: C:/xampp/htdocs/EcommerceShop/nginx/nginx-1.27.0/html/wordpress/wp-content/plugins/simply-static//src/integrations/simply-cdn/assets/ssh-form-webhook.js
+[2024-06-20 10:31:13] [class-ss-archive-creation-job.php:175] We've found our next task: fetch_urls
+[2024-06-20 10:31:13] [class-ss-archive-creation-job.php:136] Current task: fetch_urls
+[2024-06-20 10:31:13] [class-ss-archive-creation-job.php:153] Performing task: fetch_urls
+[2024-06-20 10:31:13] [class-ss-fetch-urls-task.php:69] Total pages: 2; Pages remaining: 2
+[2024-06-20 10:31:13] [class-ss-fetch-urls-task.php:72] URL: http://localhost/
+[2024-06-20 10:31:13] [class-ss-task.php:58] [PAGES STATUS] Remaining:2; Total: 2
+[2024-06-20 10:31:13] [class-ss-fetch-urls-task.php:83] URL is not being excluded
+[2024-06-20 10:31:13] [class-ss-url-fetcher.php:94] Fetching URL and saving it to: C:\Users\pc\AppData\Local\Temp/667404f1d6a9a-BmKg0i.tmp
+[2024-06-20 10:31:13] [class-ss-page-handler.php:38] URL Prepared:http://localhost/?simply_static_page=1
+[2024-06-20 10:31:13] [class-ss-url-fetcher.php:251] Fetching URL: http://localhost/?simply_static_page=1
+[2024-06-20 10:31:43] [class-ss-url-fetcher.php:103] Filesize: 0 bytes
+[2024-06-20 10:31:43] [class-ss-url-fetcher.php:106] We encountered an error when fetching: cURL error 28: Operation timed out after 30015 milliseconds with 0 bytes received
+[2024-06-20 10:31:43] [class-ss-url-fetcher.php:107] object(WP_Error)#2953 (3) {  ["errors"]=>  array(1) {    ["http_request_failed"]=>    array(1) {      [0]=>      string(81) "cURL error 28: Operation timed out after 30015 milliseconds with 0 bytes received"    }  }  ["error_data"]=>  array(0) {  }  ["additional_data":protected]=>  array(0) {  }}
+[2024-06-20 10:31:43] [class-ss-fetch-urls-task.php:72] URL: C:/xampp/htdocs/EcommerceShop/nginx/nginx-1.27.0/html/wordpress/wp-content/plugins/simply-static//src/integrations/simply-cdn/assets/ssh-form-webhook.js
+[2024-06-20 10:31:43] [class-ss-task.php:58] [PAGES STATUS] Remaining:1; Total: 2
+[2024-06-20 10:31:43] [class-ss-fetch-urls-task.php:83] URL is not being excluded
+[2024-06-20 10:31:43] [class-ss-url-fetcher.php:83] Not fetching URL because it is not a local URL
+[2024-06-20 10:31:43] [class-ss-task.php:44] Status message: [fetch_urls] Fetched 0 of 2 pages/files
+[2024-06-20 10:31:43] [class-ss-archive-creation-job.php:181] We're not done with the fetch_urls task yet
+[2024-06-20 10:31:55] [class-ss-url-fetcher.php:251] Fetching URL: http://localhost
+[2024-06-20 10:32:30] [class-ss-archive-creation-job.php:136] Current task: fetch_urls
+[2024-06-20 10:32:30] [class-ss-archive-creation-job.php:153] Performing task: fetch_urls
+[2024-06-20 10:32:30] [class-ss-fetch-urls-task.php:69] Total pages: 2; Pages remaining: 0
+[2024-06-20 10:32:30] [class-ss-task.php:44] Status message: [fetch_urls] Fetched 2 of 2 pages/files
+[2024-06-20 10:32:30] [class-ss-archive-creation-job.php:384] Error: (1) Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, string given in C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-content\plugins\simply-static\src\class-ss-util.php:540Stack trace:#0 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-content\plugins\simply-static\src\class-ss-util.php(540): array_key_exists('fetch_urls', '')#1 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-content\plugins\simply-static\src\tasks\class-ss-task.php(46): Simply_Static\Util::add_archive_status_message('', 'fetch_urls', 'Fetched 2 of 2 ...')#2 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-content\plugins\simply-static\src\tasks\class-ss-fetch-urls-task.php(129): Simply_Static\Task->save_status_message('Fetched 2 of 2 ...')#3 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-content\plugins\simply-static\src\class-ss-archive-creation-job.php(154): Simply_Static\Fetch_Urls_Task->perform()#4 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-content\plugins\woocommerce\includes\libraries\wp-background-process.php(301): Simply_Static\Archive_Creation_Job->task('fetch_urls')#5 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-content\plugins\woocommerce\includes\libraries\wp-background-process.php(447): WP_Background_Process->handle()#6 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-includes\class-wp-hook.php(324): WP_Background_Process->handle_cron_healthcheck()#7 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)#8 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-includes\plugin.php(565): WP_Hook->do_action(Array)#9 C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-cron.php(191): do_action_ref_array('wp_archive_crea...', Array)#10 {main}  thrown in <b>C:\xampp\htdocs\EcommerceShop\nginx\nginx-1.27.0\html\wordpress\wp-content\plugins\simply-static\src\class-ss-util.php</b> on line <b>540</b>
+[2024-06-20 10:32:31] [class-ss-url-fetcher.php:251] Fetching URL: http://localhost
