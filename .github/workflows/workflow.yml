@@ -57,9 +57,17 @@ jobs:
         } else {
           Write-Error "index.html không chứa thẻ a với href là http://localhost"
           }
-    - name: Run Tests
+    - name: Kiểm tra tên database trong wp-config.php
       run: |
+        $wpConfig = Get-Content -Path ".nginx/nginx-1.27.0/html/wordpress/wp-config.php" -Raw
+        if ($wpConfig -match "'DB_NAME', '(wp_emc)'") {
+          Write-Output "Tên database trong wp-config.php là wp_emc"
+        } else {
+          Write-Error "Tên database trong wp-config.php không phải là wp_emc"
+          }
+    #- name: Run Tests
+      #run: |
         # Run additional tests to verify WordPress functionality
         # ví dụ kiểm tra bằng cURL đến các trang khác nhau
-        curl -s http://localhost --output /dev/null && echo "OK" || echo "Failed"
+       # curl -s http://localhost --output /dev/null && echo "OK" || echo "Failed"
        
