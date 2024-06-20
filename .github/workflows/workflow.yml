@@ -65,16 +65,7 @@ jobs:
         } else {
           Write-Error "Tên database trong wp-config.php không phải là wp_emc"
           }
-    - name: Deploy to FTP server
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-          server: files.000webhost.com
-          username: vantruong123123
-          password: Anhkobietai123~
-          port: 21
-          protocol: ftp
-          local-dir: ./nginx/nginx-1.27.0/html/wordpress/
-          server-dir: ./public_html/
+  
     #- name: Run Tests
       #run: |
         # Run additional tests to verify WordPress functionality
