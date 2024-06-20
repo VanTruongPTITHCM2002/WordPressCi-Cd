@@ -26,7 +26,14 @@ jobs:
     
     - name: Run PHP-CGI
       run: Start-Process -FilePath "./php/php-cgi.exe" -ArgumentList "-b 127.0.0.1:9000" -NoNewWindow -PassThru
-
+    - name: Check PHP-CGI Running
+      run: |
+        $process = Get-Process | Where-Object { $_.Path -eq (Resolve-Path ./php/php-cgi.exe) }
+        if ($process) {
+          Write-Output "PHP-CGI is running"
+        } else {
+          Write-Error "PHP-CGI is not running"
+        }
     - name: start Nginx
       run: |
         cd nginx\nginx-1.27.0
