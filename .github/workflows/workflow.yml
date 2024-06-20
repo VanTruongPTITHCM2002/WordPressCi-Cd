@@ -52,10 +52,10 @@ jobs:
     - name: Kiểm tra nội dung index.html
       run: |
         $indexContent = Get-Content -Path "./index.html"
-        if ($indexContent -match '<a.*href="http://localhosst".*>') {
-          Write-Output "index.html chứa thẻ a với href là http://localhosst"
+        if ($indexContent -match '<a.*href="http://localhost".*>') {
+          Write-Output "index.html chứa thẻ a với href là http://localhost"
         } else {
-          Write-Error "index.html không chứa thẻ a với href là http://localhosst"
+          Write-Error "index.html không chứa thẻ a với href là http://localhost"
           }
     - name: Run Tests
       run: |
