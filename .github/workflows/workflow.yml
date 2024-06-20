@@ -73,7 +73,7 @@ jobs:
           password: Anhkobietai123~
           port: 21
           protocol: ftp
-          local-dir: ./nginx/nginx-1.27.0/html/wordpress
+          local-dir: ./nginx/nginx-1.27.0/html/wordpress/
           server-dir: ./public_html/
     #- name: Run Tests
       #run: |
