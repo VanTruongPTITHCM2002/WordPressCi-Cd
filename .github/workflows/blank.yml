@@ -27,21 +27,21 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up MySQL
-        run: |
-          choco install mysql
+        run: choco install mysql --force
+        env:
+          MYSQL_SERVICE_NAME: "mysql"
 
       - name: Start MySQL
         run: |
-         net start mysql
+         powershell.exe -Command "Start-Service -Name mysql" || powershell.exe -Command "Restart-Service -Name mysql"
 
       - name: Configure MySQL root password and create database
         run: |
-         mysqladmin -u root password "123456"
-         mysql -u root -p123456 -e "CREATE DATABASE wp_emc;"
+          powershell.exe -Command "while (!(mysqladmin ping -u root -p123456 -h localhost -P 3306 -timeout 5s)); do { Start-Sleep -Seconds 1 }; done; mysql -u root -p123456 -h localhost -P 3306 -e 'CREATE DATABASE wp_emc;'"
 
       - name: Import database
         run: |
-         mysql -u root -p123456 wp_emc < backup.sql
+         while (!(mysqladmin ping -u root -prootpassword -h localhost -P 3306 --silent)); do { Start-Sleep -Seconds 1 }; done; mysql -u root -p123456 -h localhost -P 3306 wordpress < ${{ github.workspace }}\backup.sql
 
       - name: Run PHP-CGI
         run: |
