@@ -43,4 +43,4 @@ jobs:
             start nginx
       - name: Test WordPress Admin Login
         run: |
-          curl -s localhost
+          curl -s http://localhost
