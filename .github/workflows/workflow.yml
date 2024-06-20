@@ -24,15 +24,21 @@ jobs:
         mysql -u root -p123456 -e "CREATE DATABASE wp_emc;"
 
     
-    - name: Run PHP-CGI
-      run: Start-Process -FilePath "./php/php-cgi.exe" -ArgumentList "-b 127.0.0.1:9000" -NoNewWindow -PassThru
-    - name: Check PHP-CGI Running
+    - name: Kiểm tra thư mục PHP-CGI
       run: |
+        Write-Output "Danh sách tệp trong thư mục php:"
+        Get-ChildItem ./php
+
+    - name: Khởi động PHP-CGI
+      run: |
+        Write-Output "Đang khởi động PHP-CGI..."
+        Start-Process -FilePath "./php/php-cgi.exe" -ArgumentList "-b 127.0.0.1:9000" -NoNewWindow -PassThru
+        Start-Sleep -Seconds 5
         $process = Get-Process | Where-Object { $_.Path -eq (Resolve-Path ./php/php-cgi.exe) }
         if ($process) {
-          Write-Output "PHP-CGI is running"
+          Write-Output "PHP-CGI đang chạy"
         } else {
-          Write-Error "PHP-CGI is not running"
+          Write-Error "PHP-CGI khởi động thất bại"
         }
     - name: start Nginx
       run: |
