@@ -23,20 +23,7 @@ jobs:
         mysqladmin -u root password "123456"
         mysql -u root -p123456 -e "CREATE DATABASE wp_emc;"
 
-    - name: Import database
-      run: |
-       $counter = 0
-        while (($counter -lt 30) -and !(mysqladmin ping -u root -prootpassword -h localhost -P 3306 --silent)); do
-          $counter++
-          Start-Sleep -Seconds 1
-        done
-
-        if (!(mysqladmin ping -u root -prootpassword -h localhost -P 3306 --silent)); then
-          echo "MySQL server did not start successfully."
-          exit 1
-        fi
-
-        mysql -u root -prootpassword wordpress < backup.sql
+    
     - name: Run PHP-CGI
       run: Start-Process -FilePath "php-cgi.exe" -ArgumentList "-b 127.0.0.1:9000" -NoNewWindow -PassThru
 
