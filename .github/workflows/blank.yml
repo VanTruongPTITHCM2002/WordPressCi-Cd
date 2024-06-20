@@ -26,7 +26,22 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      
+      - name: Set up MySQL
+        run: |
+          choco install mysql
+
+      - name: Start MySQL
+        run: |
+         net start mysql
+
+      - name: Configure MySQL root password and create database
+        run: |
+         mysqladmin -u root password "123456"
+         mysql -u root -p123456 -e "CREATE DATABASE wp_emc;"
+
+      - name: Import database
+        run: |
+         mysql -u root -p123456 wp_emc < backup.sql
 
       - name: Run PHP-CGI
         run: |
