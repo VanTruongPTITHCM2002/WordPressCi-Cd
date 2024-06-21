@@ -10,7 +10,9 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
     - name: Kiểm tra thư mục PHP-CGI
       run: |
         Write-Output "Danh sách tệp trong thư mục php:"
